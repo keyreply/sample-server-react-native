@@ -139,7 +139,7 @@ app.post("/pushtoken/:username", (req, res, next) => {
 })
 
 // SET PUSH TOKEN TO DEFINED USERNAME
-app.post("/logut/:username", (req, res, next) => {
+app.post("/logout/:username", (req, res, next) => {
   const { username } = req.params;
   const { token } = req.body;
   
