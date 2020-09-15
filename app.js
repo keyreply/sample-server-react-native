@@ -123,7 +123,7 @@ app.put("/", (req, res, next) => {
   }
 })
 
-app.post("/pushToken/:username", (req, res, next) => {
+app.post("/pushtoken/:username", (req, res, next) => {
   const { username } = req.params;
   const { token } = req.body;
   
