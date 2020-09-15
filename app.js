@@ -42,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/webchat", express.static(path.join(__dirname, "public")));
 
+// get jwt by query endpoint
 app.get("/", (req, res, next) => {
   const { id } = req.query;
 
@@ -63,6 +64,7 @@ app.get("/", (req, res, next) => {
   next(err);
 })
 
+// get usernames list
 app.get("/users", (req, res, next) => {
   const { usernames } = req.query; 
   if (usernames === "true") {
@@ -74,6 +76,7 @@ app.get("/users", (req, res, next) => {
   res.send({ users });
 })
 
+// login
 app.post("/", (req, res, next) => {
   const { username } = req.body;
 
@@ -95,6 +98,7 @@ app.post("/", (req, res, next) => {
   next(err);
 })
 
+// verify jwt
 app.put("/", (req, res, next) => {
   const { token } = req.body;
 
@@ -119,7 +123,7 @@ app.put("/", (req, res, next) => {
   }
 })
 
-app.post("/:username", (req, res, next) => {
+app.post("/pushToken/:username", (req, res, next) => {
   const { username } = req.params;
   const { token } = req.body;
   
