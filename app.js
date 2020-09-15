@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const path = require("path");
 const http = require("http");
-const { timeStamp } = require("console");
 
 const server = http.createServer(app);
 const { PORT=3000, JWT_SECRET="development_secret" } = process.env;
@@ -23,7 +22,7 @@ const users = [
     role: "admin",
     deparment: "administration",
     sub: "administrator",
-    pushToken: ""
+    pushToken: []
   },
   {
     id: "usr-demo-2",
@@ -33,7 +32,7 @@ const users = [
     role: "user",
     deparment: "administration",
     sub: "administrator",
-    pushToken: ""
+    pushToken: []
   }
 ]
 
@@ -142,8 +141,8 @@ app.post("/pushtoken/:username", (req, res, next) => {
   
   const foundUser = users.find(user => user.username === username);
 
-  if (foundUser) {
-    foundUser.pushToken = token;
+  if (foundUser && token) {
+    foundUser.pushToken.push(token);
     
     res.send({ message: "Push Token set" });
 
@@ -152,7 +151,30 @@ app.post("/pushtoken/:username", (req, res, next) => {
 
   const err = {
     status: 401,
-    message: "username unidentified"
+    message: "username or push token unidentified"
+  }
+
+  next(err);
+})
+
+// SET PUSH TOKEN TO DEFINED USERNAME
+app.post("/logut/:username", (req, res, next) => {
+  const { username } = req.params;
+  const { token } = req.body;
+  
+  const foundUser = users.find(user => user.username === username);
+
+  if (foundUser && token) {
+    foundUser.pushToken = foundUser.pushToken.filter(el => el !== token);
+    
+    res.send({ message: "Push Token removed" });
+
+    return;
+  }
+
+  const err = {
+    status: 401,
+    message: "username or push token unidentified"
   }
 
   next(err);
