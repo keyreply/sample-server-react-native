@@ -10,31 +10,12 @@ const cors = require("cors");
 const path = require("path");
 const http = require("http");
 
+const masterUser = require("./user.json");
+
 const server = http.createServer(app);
 const { PORT=3000, JWT_SECRET="development_secret" } = process.env;
 
-const users = [
-  {
-    id: "usr-demo-1",
-    username: "krdemo",
-    email: "krdemo@test.com",
-    name: "User Demo",
-    role: "admin",
-    deparment: "administration",
-    sub: "administrator",
-    pushToken: []
-  },
-  {
-    id: "usr-demo-2",
-    username: "krdemo2",
-    email: "krdemo2@test.com",
-    name: "User Demo 2",
-    role: "user",
-    deparment: "administration",
-    sub: "administrator",
-    pushToken: []
-  }
-]
+const users = masterUser;
 
 const encodeMid = (req, res, next) => {
   const { username } = req;
