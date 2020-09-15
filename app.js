@@ -37,55 +37,16 @@ const users = [
   }
 ]
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use("/webchat", express.static(path.join(__dirname, "public")));
-
-// get jwt by query endpoint
-app.get("/", (req, res, next) => {
-  const { id } = req.query;
-
-  const foundUser = users.find(user => user.username === id);
-
-  if (foundUser) {
-    const encoded = jwt.sign(foundUser, JWT_SECRET, { expiresIn: 3600 * 1000 });
-    
-    res.send(encoded);
-
-    return;
-  }
-
-  const err = {
-    status: 401,
-    message: "username unidentified"
-  }
-
-  next(err);
-})
-
-// get usernames list
-app.get("/users", (req, res, next) => {
-  const { usernames } = req.query; 
-  if (usernames === "true") {
-    const mapped = users.map(user => user.username);
-
-    res.send({ users: mapped });
-    return;
-  }
-  res.send({ users });
-})
-
-// login
-app.post("/", (req, res, next) => {
-  const { username } = req.body;
+const encodeMid = (req, res, next) => {
+  const { username } = req;
 
   const foundUser = users.find(user => user.username === username);
 
   if (foundUser) {
-    const encoded = jwt.sign(foundUser, JWT_SECRET, { expiresIn: 3600 * 1000 });
-    
-    res.send(encoded);
+    const token = jwt.sign(foundUser, JWT_SECRET, { expiresIn: 3600 * 1000 });
+
+    req.token = token;
+    next();
 
     return;
   }
@@ -94,21 +55,19 @@ app.post("/", (req, res, next) => {
     status: 401,
     message: "username unidentified"
   }
-
   next(err);
-})
+}
 
-// verify jwt
-app.put("/", (req, res, next) => {
-  const { token } = req.body;
-
+const decodeMid = (req, res, next) => {
+  const { token } = req;
   try {
     const verified = jwt.verify(token, JWT_SECRET);
     const found = users.find(user => user.username === verified.username);
 
     if (found) {
-      res.send({ message: "verified", username: verified.username });
-      
+      req.verified = verified;
+      next();
+
       return;
     }
 
@@ -116,13 +75,67 @@ app.put("/", (req, res, next) => {
       status: 401,
       message: "token unverified"
     }
-
     next(err);
   } catch (err) {
     next(err);
   }
+}
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/webchat", express.static(path.join(__dirname, "public")));
+
+// GET JWT BY QUERY ENDPOINT (PUSH TOKEN DEFINED ALREADY)
+app.get("/", (req, res, next) => {
+  const { id } = req.query;
+
+  req.username = id;
+  next();
+}, encodeMid, (req, res, next) => {
+  const { token } = req;
+
+  res.send(token);
 })
 
+// GET USERNAMES LIST
+app.get("/users", (req, res, next) => {
+  const { completed } = req.query; 
+  if (completed === "true") {
+    res.send({ users });
+
+    return;
+  }
+  const mapped = users.map(user => user.username);
+
+  res.send({ users: mapped });
+})
+
+// LOGIN (PUSH TOKEN NOT DEFINED YET)
+app.post("/", (req, res, next) => {
+  const { username } = req.body;
+
+  req.username = username;
+  next();
+}, encodeMid, (req, res, next) => {
+  const { token } = req;
+
+  res.send(token);
+})
+
+// VERIFY JWT (PUSH TOKEN NOT DEFINED YET)
+app.put("/", (req, res, next) => {
+  const { token } = req.body;
+
+  req.token = token;
+  next();
+}, decodeMid, (req, res, next) => {
+  const { verified } = req;
+
+  res.send({ message: "verified", username: verified.username });
+})
+
+// SET PUSH TOKEN TO DEFINED USERNAME
 app.post("/pushtoken/:username", (req, res, next) => {
   const { username } = req.params;
   const { token } = req.body;
@@ -145,6 +158,31 @@ app.post("/pushtoken/:username", (req, res, next) => {
   next(err);
 })
 
+// VERIFY JWT INCLUDED PUSH TOKEN INFORMATION
+app.get("/internal/decode", (req, res, next) => {
+  const { authorization } = req.headers;
+  const splitted = authorization.split(' ');
+
+  if (splitted[0] !== 'Bearer') {
+    const err = {
+      status: 401,
+      message: "invalid token format"
+    }
+    next(err);
+
+    return;
+  }
+  const token = splitted[1];
+
+  req.token = token;
+  next();
+}, decodeMid, (req, res, next) => {
+  const { verified } = req;
+
+  res.send({ verified });
+})
+
+// ERROR HANDLER
 app.use((err, req, res, next) => {
   console.log("ERROR", err);
 
