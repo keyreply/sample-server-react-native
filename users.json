@@ -18,5 +18,15 @@
     "deparment": "administration",
     "sub": "administrator",
     "pushToken": []
+  },
+  {
+    "id": "usr-demo-3",
+    "username": "krdemo3",
+    "email": "krdemo3@test.com",
+    "name": "User Demo 3",
+    "role": "user",
+    "deparment": "administration",
+    "sub": "administrator",
+    "pushToken": []
   }
 ]
