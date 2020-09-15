@@ -43,8 +43,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/webchat", express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res, next) => {
-  const encoded = jwt.sign(user, JWT_SECRET, { expiresIn: 3600 * 1000 });
-  res.send(encoded);
+  const { id } = req.query;
+
+  const foundUser = users.find(user => user.username === id);
+
+  if (foundUser) {
+    const encoded = jwt.sign(foundUser, JWT_SECRET, { expiresIn: 3600 * 1000 });
+    
+    res.send(encoded);
+
+    return;
+  }
+
+  const err = {
+    status: 401,
+    message: "username unidentified"
+  }
+
+  next(err);
 })
 
 app.get("/users", (req, res, next) => {
