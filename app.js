@@ -64,6 +64,13 @@ app.get("/", (req, res, next) => {
 })
 
 app.get("/users", (req, res, next) => {
+  const { usernames } = req.query; 
+  if (usernames === "true") {
+    const mapped = users.map(user => user.username);
+
+    res.send({ users: mapped });
+    return;
+  }
   res.send({ users });
 })
 
