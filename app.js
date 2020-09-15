@@ -132,7 +132,7 @@ app.post("/pushtoken/:username", (req, res, next) => {
   if (foundUser) {
     foundUser.pushToken = token;
     
-    res.send({ message: "Push Token set"});
+    res.send({ message: "Push Token set" });
 
     return;
   }
