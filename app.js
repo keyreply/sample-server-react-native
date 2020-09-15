@@ -106,7 +106,7 @@ app.get("/users", (req, res, next) => {
 
     return;
   }
-  const mapped = users.map(user => user.username);
+  const mapped = users.map(user => ({ username: user.username, pushToken: user.pushToken }));
 
   res.send({ users: mapped });
 })
