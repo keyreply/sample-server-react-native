@@ -10,7 +10,7 @@ const cors = require("cors");
 const path = require("path");
 const http = require("http");
 
-const masterUser = require("./user.json");
+const masterUser = require("./users.json");
 
 const server = http.createServer(app);
 const { PORT=3000, JWT_SECRET="development_secret" } = process.env;
