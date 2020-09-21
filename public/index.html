@@ -10,16 +10,16 @@
 <body>
   <script>
     window.kr_settings = {
-      "server": "https://panin-uat.app.keyreply.com/server/",
+      "server": "http://192.168.6:3000",
       "isPreview": true,
-      // "getToken": {
-      //   "url": "http://localhost:3030",
-      //   "method": "GET"
-      // },
-      // user: {}
+      "getToken": {
+        "url": "http://122891fc5350.ngrok.io",
+        "method": "GET"
+      },
+      user: {}
     };
   </script>
-  <script async src="https://panin-uat.app.keyreply.com/webchat/js/app.js"></script>
+  <script async src="http://192.168.1.6:8081/js/app.js"></script>
   <style>
     /*Panel Header*/
     #keyreply-panel-header {
