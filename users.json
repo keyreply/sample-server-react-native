@@ -6,7 +6,7 @@
     "name": "User Demo",
     "role": "admin",
     "deparment": "administration",
-    "sub": "administrator",
+    "sub": "usr-demo-1",
     "pushToken": []
   },
   {
@@ -16,7 +16,7 @@
     "name": "User Demo 2",
     "role": "user",
     "deparment": "administration",
-    "sub": "administrator",
+    "sub": "usr-demo-2",
     "pushToken": []
   },
   {
@@ -26,7 +26,7 @@
     "name": "User Demo 3",
     "role": "user",
     "deparment": "administration",
-    "sub": "administrator",
+    "sub": "usr-demo-3",
     "pushToken": []
   }
 ]
