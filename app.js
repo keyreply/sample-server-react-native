@@ -64,10 +64,10 @@ const decodeMid = (req, res, next) => {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/webchat", express.static(path.join(__dirname, "public")));
+app.use("/", express.static(path.join(__dirname, "public")));
 
 // GET JWT BY QUERY ENDPOINT (PUSH TOKEN DEFINED ALREADY)
-app.get("/", (req, res, next) => {
+app.get("/auth", (req, res, next) => {
   const { id } = req.query;
 
   req.username = id;
@@ -92,7 +92,7 @@ app.get("/users", (req, res, next) => {
 })
 
 // LOGIN (PUSH TOKEN NOT DEFINED YET)
-app.post("/", (req, res, next) => {
+app.post("/auth", (req, res, next) => {
   const { username } = req.body;
 
   req.username = username;
@@ -104,7 +104,7 @@ app.post("/", (req, res, next) => {
 })
 
 // VERIFY JWT (PUSH TOKEN NOT DEFINED YET)
-app.put("/", (req, res, next) => {
+app.put("/auth", (req, res, next) => {
   const { token } = req.body;
 
   req.token = token;
