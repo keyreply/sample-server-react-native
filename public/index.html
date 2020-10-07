@@ -16,7 +16,10 @@
         "url": "https://proxy2.keyreply.com/auth/",
         "method": "GET"
       },
-      user: {}
+      user: {},
+      nativeAction: function (data) {
+        window.ReactNativeWebView.postMessage("Hello from here");
+      }
     };
   </script>
   <script async src="http://localhost:8081/js/app.js"></script>
