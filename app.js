@@ -23,7 +23,7 @@ const encodeMid = (req, res, next) => {
   const foundUser = users.find(user => user.username === username);
 
   if (foundUser) {
-    const token = jwt.sign(foundUser, JWT_SECRET, { expiresIn: 30 });
+    const token = jwt.sign(foundUser, JWT_SECRET, { expiresIn: Number(process.env.TOKEN_EXPIRE_TIME) || 30 });
 
     req.token = token;
     next();
