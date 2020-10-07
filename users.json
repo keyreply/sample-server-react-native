@@ -1,32 +1,29 @@
 [
   {
-    "id": "usr-demo-1",
+    "sub": "usr-demo-1",
     "username": "krdemo",
     "email": "krdemo@test.com",
     "name": "User Demo",
     "role": "admin",
     "deparment": "administration",
-    "sub": "usr-demo-1",
     "pushToken": []
   },
   {
-    "id": "usr-demo-2",
+    "sub": "usr-demo-2",
     "username": "krdemo2",
     "email": "krdemo2@test.com",
     "name": "User Demo 2",
     "role": "user",
     "deparment": "administration",
-    "sub": "usr-demo-2",
     "pushToken": []
   },
   {
-    "id": "usr-demo-3",
+    "sub": "usr-demo-3",
     "username": "krdemo3",
     "email": "krdemo3@test.com",
     "name": "User Demo 3",
     "role": "user",
     "deparment": "administration",
-    "sub": "usr-demo-3",
     "pushToken": []
   }
 ]
