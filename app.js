@@ -23,7 +23,7 @@ const encodeMid = (req, res, next) => {
   const foundUser = users.find(user => user.username === username);
 
   if (foundUser) {
-    const token = jwt.sign(foundUser, JWT_SECRET, { expiresIn: 3600 * 1000 });
+    const token = jwt.sign(foundUser, JWT_SECRET, { expiresIn: 60 });
 
     req.token = token;
     next();
@@ -42,6 +42,7 @@ const decodeMid = (req, res, next) => {
   const { token } = req;
   try {
     const verified = jwt.verify(token, JWT_SECRET);
+    console.log({verified, token})
     const found = users.find(user => user.username === verified.username);
 
     if (found) {
