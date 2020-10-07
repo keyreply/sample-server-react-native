@@ -193,6 +193,10 @@ app.use((err, req, res, next) => {
   if (err.error) {
     console.log(err.error);
   }
+  if (err.name === "TokenExpiredError") {
+    res.status(403).send({ message: err.message });
+    return;
+  }
   if (err.status) {
     res.status(err.status).send({ message: err.message });
     return;    
