@@ -43,10 +43,10 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Expected response (status: `200`):
     ```json
       {
-        users: [
+        "users": [
           {
-            username: "krdemo",
-            pushToken: [],
+            "username": "krdemo",
+            "pushToken": [],
           },
           ...
         ]
@@ -55,15 +55,15 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Expected response `?completed=true` (status: `200`):
     ```json
       {
-        users: [
+        "users": [
           {
-            sub: "usr-demo-1",
-            username: "krdemo",
-            email: "krdemo@test.com",
-            name: "User Demo",
-            role: "admin",
-            deparment: "administration",
-            pushToken: [ ]
+            "sub": "usr-demo-1",
+            "username": "krdemo",
+            "email": "krdemo@test.com",
+            "name": "User Demo",
+            "role": "admin",
+            "deparment": "administration",
+            "pushToken": [ ]
           },
           ...
         ]
