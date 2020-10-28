@@ -41,7 +41,7 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Query:
     - `completed`: `true`, optional
   - Expected response (status: `200`):
-    ```json
+    ```
       {
         "users": [
           {
@@ -53,7 +53,7 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
       }
     ```
   - Expected response `?completed=true` (status: `200`):
-    ```json
+    ```
       {
         "users": [
           {
@@ -76,12 +76,12 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Query:
     - `id`: `String`, required
   - Expected response (status: `200`):
-    ```json
+    ```
     eyJhbGciO...
     ```
   - Error responses:
     - status: `401`:
-      ```json
+      ```
       {
         "message": "username unidentified"
       }
@@ -93,12 +93,12 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Body:
     - `username`: `String`, required
   - Expected response (status: `200`):
-    ```json
+    ```
     eyJhbG...
     ```
   - Error responses:
     - status: `401`:
-      ```json
+      ```
       {
         "message": "username unidentified"
       }
@@ -110,7 +110,7 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Body:
     - `token`: `String`, required
   - Expected response (status: `200`):
-    ```json
+    ```
       {
         "message": "verified", 
         "username": "..."
@@ -118,23 +118,23 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
     ```
   - Error responses:
     - status: `400`:
-      ```json
+      ```
         {
           "message": "jwt must be provided"
         }
       ```
-      ```json
+      ```
         {
           "message": "jwt malformed"
         }
       ```
-      ```json
+      ```
         {
           "message": "invalid signature"
         }
       ```
     - status: `403`:
-      ```json
+      ```
         {
           "message": "jwt expired"
         }
@@ -148,14 +148,14 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Body:
     - `token`: `String`, required
   - Expected response (status: `200`):
-    ```json
+    ```
       {
         "message": "Push Token set"
       }
     ```
   - Error responses:
     - status: `401`:
-      ```json
+      ```
         {
           "message": "username or push token unidentified"
         }
@@ -169,14 +169,14 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Body:
     - `token`: `String`, required
   - Expected response (status: `200`):
-    ```json
+    ```
       {
         "message": "Push Token removed"
       }
     ```
   - Error responses:
     - status: `401`:
-      ```json
+      ```
         {
           "message": "username or push token unidentified"
         }
@@ -188,7 +188,7 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
   - Header(s):
     - `Authorization`: `Bearer <token>`, required
   - Expected response (status: `200`):
-    ```json
+    ```
       {
         "verified": {
           ...
@@ -197,29 +197,29 @@ Access the deployed REST API via SERVER_URL = `http://localhost:<PORT>`
     ```
   - Error responses:
     - status: `400`:
-      ```json
+      ```
         {
           "message": "jwt must be provided"
         }
       ```
-      ```json
+      ```
         {
           "message": "jwt malformed"
         }
       ```
-      ```json
+      ```
         {
           "message": "invalid signature"
         }
       ```
     - status: `401`:
-      ```json
+      ```
         {
           "message": "invalid token format"
         }
       ```
     - status: `403`:
-      ```json
+      ```
         {
           "message": "jwt expired"
         }
