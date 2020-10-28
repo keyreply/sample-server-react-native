@@ -1,6 +1,10 @@
 # Express Server for KeyReply React Native Webchat Demo App
 
-built with `Express`
+v1.0 built with `Express`
+
+## Usage
+
+Built to support React Native Keyreply Webchat Demo App's backend. [See more about KR Demo App Repository.](https://github.com/keyreply/expo-react-native-webview)
 
 ## Usage
 
