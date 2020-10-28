@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Demo Webchat</title>
+  <title>KeyReply Demo</title>
 </head>
+
 <body>
   <script>
     window.kr_settings = {
-      'server': '',
+      'server': 'http://localhost:3000',
       'isPreview': true,
+      // 'getToken': {
+      //   'url': 'https://expo-sample-server.herokuapp.com/auth/',
+      //   'method': 'GET'
+      // },
       'user': {
-        'source': '',
+        'source': 'panin_internet_general',
+        // 'JWT': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MDMyMTQwNzYsImV4cCI6MTYzNDc1MDA3NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoidXNlcnNpZC9Uek1Vb2NNRjRwIiwibmFtZSI6IkNpbmR5IiwiZW1haWwiOiJLb255QHRlbWVub3MuY29tIiwiY2lmIjoiMDA5OTg4NTU1NTY2In0.dDRjCrlPciV9uX9MhkAPLNV_5avAzuQ7Zy2Ryqidd1M'
       },
+      // 'nativeAction': function (data) {
+      //   window.ReactNativeWebView.postMessage('Hello from here');
+      // },
+      'tallView': true,
     };
   </script>
-  <script async src="your-webchat-script-path.js"></script>
+  <script async src='http://localhost:8081/js/app.js'></script>
   <style>
     /*Panel Header*/
     #keyreply-panel-header {
@@ -42,6 +53,60 @@
         bottom: <insert here> !important;
       }
     }
+
+    /* PANIN Customized Style */
+    /* ====== */
+    /* #keyreply-chat-window header#keyreply-panel-header.el-header {
+      height: 75px !important;
+      padding: 20px !important;
+    }
+    #keyreply-chat-window #keyreply-panel-header .keyreply-chat-title, #keyreply-chat-window #keyreply-panel-header .keyreply-header-button {
+      margin: 5px 0 !important;
+    }
+    .keyreply-header-button .el-icon-full-screen {
+      visibility: hidden;
+    }
+
+    #keyreply-chat-window #keyreply-panel-body {
+      top: 65px !important;
+      padding-top: 26px !important;
+    }
+    #keyreply-chat-window .keyreply-disconnected-banner, #keyreply-chat-window .keyreply-livechat-banner, #keyreply-chat-window .keyreply-livechat-banner-large {
+      top: 69px !important;
+    } */
+
+    /* #keyreply-chat-window {
+      border-top-left-radius: 7px !important;
+      border-top-right-radius: 7px !important;
+      border-bottom-left-radius: 7px !important;
+      border-bottom-right-radius: 7px !important;
+    }
+    #keyreply-panel-header {
+      border-top-left-radius: 7px !important;
+      border-top-right-radius: 7px !important;
+    } */
+
+    /* #keyreply-panel-header {
+      background-color: #fff !important;
+      border-bottom: 0px solid #fff !important;
+    }
+    #keyreply-chat-window #keyreply-panel-header .keyreply-chat-logo {
+      display: none !important;
+    }
+    #keyreply-chat-window #keyreply-panel-header .keyreply-chat-title, #keyreply-chat-window #keyreply-panel-header .keyreply-header-button, #keyreply-chat-window #keyreply-panel-header .el-icon-more {
+      color: #545455 !important;
+    }
+    #keyreply-chat-window {
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+    }
+    #keyreply-panel-header {
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+    } */
   </style>
 </body>
+
 </html>
