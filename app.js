@@ -139,7 +139,7 @@ app.post("/pushtoken/:username", (req, res, next) => {
   next(err);
 })
 
-// SET PUSH TOKEN TO DEFINED USERNAME
+// REMOVE PUSH TOKEN FROM DEFINED USERNAME / LOGOUT
 app.post("/logout/:username", (req, res, next) => {
   const { username } = req.params;
   const { token } = req.body;
@@ -199,7 +199,11 @@ app.use((err, req, res, next) => {
   }
   if (err.status) {
     res.status(err.status).send({ message: err.message });
-    return;    
+    return;
+  }
+  if (err.message) {
+    res.status(400).send({ message: err.message });
+    return;
   }
 
   res.status(500).send({ message: "internal error" });
